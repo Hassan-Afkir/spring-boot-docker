@@ -27,7 +27,6 @@ pipeline {
             }
         }
     }
- 
     stage('Deploy image') {
         steps{
             script{
