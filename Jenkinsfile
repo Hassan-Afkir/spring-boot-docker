@@ -25,8 +25,10 @@ pipeline {
             }
         }
     stage('Create image') {
-            script {
+            steps { 
+                script{
                  app = docker.build("underwater")
+                }
             }
         }
     }
