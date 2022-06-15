@@ -1,7 +1,7 @@
 pipeline {
     environment {
         registry = '216413260795.dkr.ecr.us-east-2.amazonaws.com/jenkins-pipeline'
-        registryCredential = 'jeinkins-aws'
+        registryCredential = 'sam-jenkins-demo-credentials'
         dockerImage = ''
     }
     agent {
