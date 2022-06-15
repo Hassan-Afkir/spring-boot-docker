@@ -25,8 +25,8 @@ pipeline {
             }
         }
     stage('Create image') {
-            steps {
-                sh 'docker build --build-arg JAR_FILE=target/*.jar -t spring/myapp .'
+            script {
+                 app = docker.build("underwater")
             }
         }
     }
