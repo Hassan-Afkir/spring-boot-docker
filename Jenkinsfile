@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+        registry = '216413260795.dkr.ecr.us-east-2.amazonaws.com/jenkins-pipeline'
+        registryCredential = 'sam-jenkins-demo-credentials'
+        dockerImage = ''
+    }
     agent {
         docker {
             image 'maven:3.8.1-adoptopenjdk-11' 
@@ -17,7 +22,17 @@ pipeline {
 	stage('Create image') {
             steps { 
                 script{
-                 app = docker.build("underwater")
+                 dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
+            }
+        }
+    }
+ 
+    stage('Deploy image') {
+        steps{
+            script{
+                docker.withRegistry("https://" + registry, "ecr.us-east-2:" + registryCredential) {
+                    dockerImage.push()
                 }
             }
         }
