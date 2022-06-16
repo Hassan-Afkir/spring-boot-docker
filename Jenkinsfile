@@ -19,7 +19,7 @@ pipeline {
         stage('Deploy EC2') {
             steps {
                 withCredentials([string(credentialsId: 'AWS_REPOSITORY_URL_SECRET', variable: 'AWS_ECR_URL')]) {
-                #withAWS(credentials: 'sam-jenkins-demo-credentials', region: 'us-east-2') {
+                
                     script {
                         sh "aws ecs update-service --cluster hello --service hello2 --force-new-deployment";
                     }
