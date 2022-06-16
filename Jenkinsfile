@@ -15,31 +15,13 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages {
-        stage('Build') { 
-            steps {
-                sh 'mvn -B -DskipTests clean package' 
-            }
-        }
-        stage('Create image') {
-                steps { 
-                    script{
-                    dockerImage = docker.build registry + ":latest"
-                    }
-                }
-            }
-        stage('Deploy image') {
-            steps{
-                script{
-                    docker.withRegistry("https://" + registry, "ecr:us-east-2:" + registryCredential) {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
+        
         stage('Deploy EC2') {
             steps {
                 withAWS(credentials:registryCredential) {
-                        
+                    script {
+                        sh("/usr/local/bin/aws ecs update-service --cluster "hello" --service "hello2" --force-new-deployment");
+                    }
 
                 }
             }
