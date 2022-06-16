@@ -36,5 +36,13 @@ pipeline {
                 }
             }
         }
+        stage('Deploy EC2') {
+            steps {
+                withAWS(credentials:registryCredential) {
+                        
+
+                }
+            }
+        }
     }
 }
