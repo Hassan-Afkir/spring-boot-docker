@@ -20,6 +20,7 @@ pipeline {
             steps {
                 withAWS(credentials: 'sam-jenkins-demo-credentials', region: 'us-east-2') {
                     script {
+                        sh 'java -version'
                         sh "/usr/local/bin/aws ecs update-service --cluster Hello --service hello2 --force-new-deployment";
                     }
 
