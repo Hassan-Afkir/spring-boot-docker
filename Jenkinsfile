@@ -20,7 +20,7 @@ pipeline {
             steps {
                 withAWS(credentials:registryCredential) {
                     script {
-                        sh("/usr/local/bin/aws ecs update-service --cluster "hello" --service "hello2" --force-new-deployment");
+                        sh("/usr/local/bin/aws ecs update-service --cluster hello --service hello2 --force-new-deployment");
                     }
 
                 }
