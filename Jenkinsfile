@@ -18,9 +18,9 @@ pipeline {
         
         stage('Deploy EC2') {
             steps {
-                withAWS(credentials:registryCredential) {
+                withAWS(credentials: 'sam-jenkins-demo-credentials', region: 'us-east-2') {
                     script {
-                        sh("aws ecs update-service --cluster hello --service hello2 --force-new-deployment");
+                        sh "aws ecs update-service --cluster hello --service hello2 --force-new-deployment";
                     }
 
                 }
